@@ -1,0 +1,43 @@
+- restConfiguration:
+    dataFormatProperty:
+      - key: prettyPrint
+        value: 'true'
+    apiProperty:
+      - key: openapi.version
+        value: 3.20.1
+    component: platform-http
+    scheme: http
+    bindingMode: 'off'
+    enableCors: true
+    host: localhost
+    port: '3000'
+    contextPath: /api
+    apiContextPath: /api
+- rest:
+    id: rest-73e4
+    get:
+      - id: get-c1e0
+        bindingMode: 'off'
+        produces: application/json
+        consumes: application/json
+        enableCors: true
+        path: /hello
+        to: direct:hello
+    consumes: application/json
+    produces: application/json
+    bindingMode: 'off'
+    enableCors: true
+    path: /home
+- route:
+    id: hello
+    from:
+      uri: direct:hello
+      id: from-7d16
+      steps:
+        - bean:
+            id: bean-603e
+            ref: LoginBean
+            className: Login
+            description: basic input bean
+            codeDescription: get username and password
+            method: getUsernamePassword
